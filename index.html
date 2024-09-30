@@ -130,7 +130,7 @@
                 eventoGroup.className = 'evento-group';
                 eventoGroup.innerHTML = `
                     <input type="date" placeholder="Data Evento" class="dataEvento">
-                    <input type="text" placeholder="Nome da Matéria" class="nomeMateria" maxlength="40">
+                    <input type="text" placeholder="Nome do Evento" class="nomeMateria" maxlength="80">
                     <input type="text" placeholder="P/F/J" class="statusEvento">
                     <textarea placeholder="Observação Justificativa" class="obsJustificativa" maxlength="40" style="display: none;"></textarea>
                 `;
@@ -167,11 +167,11 @@
             let resultado = `Presenças: ${presencas}, Faltas: ${faltas}, Justificativas: ${justificativas}`;
             resultado += `<br>Porcentagem de Faltas: ${mediaFaltas.toFixed(2)}%`;
 
-            if (mediaFaltas > 24.99) {
-                resultado += ' <span class="alert">Atenção: Alta Taxa de Faltas!</span>';
+            if (mediaFaltas > 26.00) {
+                resultado += ' <span class="alert">Atenção!</span>';
             }
             if (mediaFaltas >= 75) {
-                resultado += ' <span class="alert">Desligar: Taxa de Faltas Muito Alta!</span>';
+                resultado += ' <span class="alert">Taxa de Faltas Alta!</span>';
             }
 
             document.getElementById('resultado').innerHTML = resultado;
@@ -232,7 +232,7 @@
             yPos += lineHeight;
 
             // Nome do aluno em vermelho se a porcentagem de faltas for maior que 24.99%
-            if (mediaFaltas > 24.99) {
+            if (mediaFaltas > 26.00) {
                 doc.setTextColor(255, 0, 0); // Nome em vermelho
             }
             doc.text(`Nome: ${nome}`, marginLeft, yPos);
@@ -258,7 +258,7 @@
             yPos += lineHeight;
             doc.text("Evento", marginLeft, yPos);
             doc.text("Data", marginLeft + 20, yPos);
-            doc.text("Matéria", marginLeft + 50, yPos);
+            doc.text("Nome do Evento", marginLeft + 50, yPos);
             doc.text("Status", marginLeft + 110, yPos);
             doc.text("Observação", marginLeft + 140, yPos);
 
@@ -307,20 +307,19 @@
             yPos += lineHeight; // Espaçamento para o final do relatório
             doc.text(`Porcentagem de Faltas: ${mediaFaltas.toFixed(2)}%`, marginLeft, yPos);
 
-            if (mediaFaltas > 24.99) {
+            if (mediaFaltas > 26.00) {
                 yPos += lineHeight;
                 doc.setTextColor(255, 0, 0);
-                doc.text('Atenção: Alta Taxa de Faltas!', marginLeft, yPos);
+                doc.text('Atenção!', marginLeft, yPos);
             }
             if (mediaFaltas >= 75) {
                 yPos += lineHeight;
-                doc.text('Desligar: Taxa de Faltas Muito Alta!', marginLeft, yPos);
+                doc.text('Taxa de Faltas Alta!', marginLeft, yPos);
             }
             doc.setTextColor(0, 0, 0);
 
             doc.save('relatorio_faltas.pdf');
         }
-    </script>
-    
+    </script>    
 </body>
 </html>
